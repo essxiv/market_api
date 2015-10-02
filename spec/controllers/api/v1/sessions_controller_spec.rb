@@ -22,11 +22,11 @@ describe Api::V1::SessionsController do
             it { should respond_with 200 }
         end
 
-        context "when the credientals are incorrect" do
+        context "when the credentials are incorrect" do
 
             before(:each) do
-                credientals = { email: @user.email, password: "invalidpassword" }
-                post :create, { session: credientals }
+                credentials = { email: @user.email, password: "invalidpassword" }
+                post :create, { session: credentials }
             end
 
             it "returns a json with an error" do
@@ -35,5 +35,16 @@ describe Api::V1::SessionsController do
 
             it { should respond_with 422 }
         end
+    end
+
+    describe "DELETE #destroy" do
+        before(:each) do
+            @user = FactoryGirl.create :user
+            #sign_in @user, store: false
+            #api_authorization_header @user.auth_token
+            delete :destroy, id: @user.auth_token
+        end
+
+        it { should respond_with 204 }
     end
 end
