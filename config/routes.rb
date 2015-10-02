@@ -10,6 +10,7 @@ MarketApi::Application.routes.draw do
       # List Resources
       resources :users, :only => [:show, :create, :update, :destroy]
       resources :sessions, :only => [:create, :destroy]
+      resources :products, :only => [:show, :index]
     end
   end
 end
