@@ -8,7 +8,9 @@ MarketApi::Application.routes.draw do
 
     scope module: :v1, constraints: ApiConstraints.new(verison: 1, default: true) do
       # List Resources
-      resources :users, :only => [:show, :create, :update, :destroy]
+      resources :users, :only => [:show, :create, :update, :destroy] do
+        resources :products, :only => [:create, :update, :destroy]
+      end
       resources :sessions, :only => [:create, :destroy]
       resources :products, :only => [:show, :index]
     end
